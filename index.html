@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simon Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .btn {
+      transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transform: scale(1.1);
+    }
+    .btn:active {
+      transform: scale(0.9);
+    }
+    .game-over {
+      background-color: red;
+      opacity: 0.8;
+    }
+    .hidden {
+      display: none;
+    }
+    .input-field {
+      background-color: #ffffff;
+      color: #000000;
+    }
+    .input-field::placeholder {
+      color: #888888;
+    }
+  </style>
+</head>
+
+<body class="bg-blue-900 text-white font-mono flex flex-col items-center justify-center h-screen relative">
+  <!-- Entry Page -->
+  <div id="entry-page" class="flex flex-col items-center justify-center h-screen">
+    <h1 class="text-4xl mb-4">Enter Your Name</h1>
+    <form id="name-form" class="flex flex-col items-center">
+      <input type="text" id="name-input" class="input-field border border-gray-300 rounded-md p-2 mb-4 w-64" placeholder="Your Name" required>
+      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700">Start Game</button>
+    </form>
+  </div>
+
+  <!-- Game Page -->
+  <div id="game-page" class="hidden">
+    <div class="absolute top-4 right-4 text-white bg-gray-800 px-4 py-2 rounded-lg shadow-md text-lg" id="highest-score">
+      Highest Score: 0
+    </div>
+    
+    <div class="absolute top-4 left-4 text-white bg-gray-800 px-4 py-2 rounded-lg shadow-md text-lg" id="player-name">
+      Player: Guest
+    </div>
+    
+    <h1 id="level-title" class="text-4xl mb-4">Press A Key to Start</h1>
+    
+    <div class="container flex flex-wrap justify-center gap-4">
+      <div class="row flex gap-4">
+        <div type="button" id="green" class="btn bg-green-500 h-32 w-32 rounded-full border-4 border-black"></div>
+        <div type="button" id="red" class="btn bg-red-500 h-32 w-32 rounded-full border-4 border-black"></div>
+      </div>
+
+      <div class="row flex gap-4">
+        <div type="button" id="yellow" class="btn bg-yellow-500 h-32 w-32 rounded-full border-4 border-black"></div>
+        <div type="button" id="blue" class="btn bg-blue-500 h-32 w-32 rounded-full border-4 border-black"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="game.js" charset="utf-8"></script>
+  
+  <script>
+    // Handle form submission
+    document.getElementById('name-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      var name = document.getElementById('name-input').value;
+      if (name) {
+        localStorage.setItem('playerName', name);
+        document.getElementById('entry-page').classList.add('hidden');
+        document.getElementById('game-page').classList.remove('hidden');
+        updatePlayerName();
+      }
+    });
+
+    // Load player name from localStorage and show it
+    function updatePlayerName() {
+      var playerName = localStorage.getItem('playerName');
+      if (playerName) {
+        document.getElementById('player-name').textContent = "Player: " + playerName;
+      }
+    }
+
+    // Load player name on game page load
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document.getElementById('game-page').classList.contains('hidden') === false) {
+        updatePlayerName();
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+/* styles.css */
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #1b1b1b;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.game-container {
+  text-align: center;
+}
+
+#level-title {
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: color 0.5s ease;
+}
+
+#start-btn {
+  font-size: 1.5rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#start-btn:hover {
+  background-color: #2980b9;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 70%;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.btn {
+  margin: 10px;
+  height: 150px;
+  width: 150px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 50%;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.red {
+  background-color: #e74c3c;
+}
+
+.green {
+  background-color: #2ecc71;
+}
+
+.blue {
+  background-color: #3498db;
+}
+
+.yellow {
+  background-color: #f1c40f;
+}
+
+.pressed {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.8);
+  filter: brightness(0.9);
+}
+
+.game-over {
+  background-color: #e74c3c;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.h1-game-over {
+  animation: gameOverAnimation 1s ease;
+}
+
+@keyframes gameOverAnimation {
+  0% { color: red; }
+  100% { color: white; }
+}
